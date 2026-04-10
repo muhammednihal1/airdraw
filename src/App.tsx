@@ -694,7 +694,9 @@ function App() {
       {showTutorial && (
         <div className="tutorial-overlay">
           <div className="tutorial-modal glass-panel">
-            <div className="tutorial-logo">✨</div>
+            <div className="tutorial-logo">
+              <img src="/favicon.svg" alt="toobz logo" style={{ width: '64px', height: '64px', borderRadius: '16px', boxShadow: '0 8px 32px rgba(170, 59, 255, 0.3)' }} />
+            </div>
             <h2>How to Play</h2>
             <div className="tutorial-grid">
               <div className="tutorial-item">
