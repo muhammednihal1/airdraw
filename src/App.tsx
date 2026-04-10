@@ -670,7 +670,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', border: 0 }}>toobz — AI Air Drawing & Hand Tracking Canvas</h1>
+      <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', border: 0 }}>Air Draw — Gesture-Based Doodler powered by AI</h1>
       <video ref={videoRef} autoPlay playsInline muted className="background-video" />
       <canvas ref={handCanvasRef} className="hand-overlay-canvas" />
       <canvas ref={drawCanvasRef} className="drawing-canvas" />
