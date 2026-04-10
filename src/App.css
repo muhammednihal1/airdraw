@@ -1,0 +1,499 @@
+.app-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg-deep);
+}
+
+/* ─── Video & Canvas Layers ─── */
+.background-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+    z-index: 1;
+}
+
+.hand-overlay-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    transform: scaleX(-1);
+}
+
+.drawing-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hud-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* ─── Glass Panel ─── */
+.glass-panel {
+    background: rgba(10, 10, 14, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+/* ─── JARVIS Text ─── */
+.jarvis-text {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    text-align: center;
+    animation: jarvisFadeIn 0.8s ease-out, jarvisFadeOut 0.8s ease-in 3.2s forwards;
+}
+
+.jarvis-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 6px;
+    color: rgba(0, 240, 255, 0.5);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.jarvis-message {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(0, 240, 255, 0.7);
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    letter-spacing: 1px;
+    max-width: 500px;
+}
+
+@keyframes jarvisFadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes jarvisFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* ─── Tutorial Overlay ─── */
+.tutorial-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+}
+
+.tutorial-modal {
+    border-radius: var(--radius-lg);
+    padding: 40px 48px;
+    max-width: 560px;
+    width: 90%;
+    text-align: center;
+    animation: modalFadeIn 0.6s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.88) translateY(24px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.tutorial-logo {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+.tutorial-modal h2 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 28px;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+}
+
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.tutorial-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+}
+
+.tutorial-item:hover {
+    background: rgba(255,255,255,0.03);
+}
+
+.tutorial-emoji {
+    font-size: 26px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.tutorial-item strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.tutorial-item p {
+    font-size: 11px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.tutorial-btn {
+    padding: 14px 48px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: #fff;
+    color: #000;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+.tutorial-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(0, 240, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+}
+
+.tutorial-btn:hover:not(:disabled)::after {
+    width: 200px;
+    height: 200px;
+}
+
+.tutorial-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2), 0 0 60px rgba(0, 240, 255, 0.1);
+}
+
+.tutorial-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ─── Top Left Chip ─── */
+.top-left-chip {
+    position: absolute;
+    top: 24px; left: 24px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 240, 255, 0.15);
+    color: var(--text-primary);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(10px);
+}
+
+.top-left-chip:hover {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.3);
+}
+
+/* ─── Bottom Center Chip ─── */
+.bottom-chip {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 28px;
+    border-radius: var(--radius-full);
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    backdrop-filter: blur(10px);
+    transition: var(--transition-smooth);
+}
+
+.bottom-chip.gesture-drawing {
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.15);
+    color: #00f0ff;
+}
+
+.bottom-chip.gesture-erasing {
+    border-color: rgba(255, 45, 107, 0.5);
+    box-shadow: 0 0 24px rgba(255, 45, 107, 0.15);
+    color: #ff2d6b;
+}
+
+.bottom-chip.gesture-thumbsup,
+.bottom-chip.gesture-heart,
+.bottom-chip.gesture-peace {
+    border-color: rgba(255, 215, 0, 0.5);
+    box-shadow: 0 0 24px rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    animation: chipPulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes chipPulse {
+    from { box-shadow: 0 0 24px rgba(255, 215, 0, 0.15); }
+    to { box-shadow: 0 0 40px rgba(255, 215, 0, 0.3); }
+}
+
+/* ─── Right Toolbar ─── */
+.toolbar {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: var(--radius-lg);
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    width: 68px;
+    border: 1px solid rgba(0, 240, 255, 0.08);
+}
+
+.toolbar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+}
+
+.section-title {
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: rgba(0, 240, 255, 0.35);
+    text-transform: uppercase;
+}
+
+/* ─── Color Grid ─── */
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+    justify-items: center;
+}
+
+.color-btn {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    padding: 0;
+}
+
+.color-btn.active {
+    transform: scale(1.35);
+    border-color: white;
+}
+
+.color-btn:hover:not(.active) {
+    transform: scale(1.2);
+}
+
+/* ─── Vertical Sliders ─── */
+.slider-container.vertical {
+    height: 100px;
+    width: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical-slider {
+    position: absolute;
+    width: 100px;
+    height: 4px;
+    transform: rotate(-90deg);
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(0, 240, 255, 0.08);
+    border-radius: 2px;
+    outline: none;
+}
+
+.vertical-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #00f0ff;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+    transition: var(--transition-fast);
+}
+
+.vertical-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+}
+
+.slider-value {
+    font-size: 10px;
+    color: rgba(0, 240, 255, 0.4);
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.toolbar-divider {
+    width: 70%;
+    height: 1px;
+    background: rgba(0, 240, 255, 0.1);
+}
+
+/* ─── Action Buttons ─── */
+.toolbar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    align-items: center;
+}
+
+.action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: 1px solid rgba(0, 240, 255, 0.08);
+    color: rgba(0, 240, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.action-btn:hover {
+    background: rgba(0, 240, 255, 0.08);
+    color: #00f0ff;
+    border-color: rgba(0, 240, 255, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.1);
+}
+
+.action-btn:active {
+    transform: scale(0.92);
+}
+
+/* ─── Big Emoji Reaction (macOS FaceTime style) ─── */
+.reaction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 60;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: reactionContainerFade 2s ease-out forwards;
+}
+
+.reaction-emoji {
+    font-size: 120px;
+    line-height: 1;
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.5)) drop-shadow(0 0 80px rgba(255, 215, 0, 0.25));
+    animation: reactionBounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+               reactionPulse 0.8s ease-in-out 0.5s 2 alternate,
+               reactionFadeOut 0.6s ease-in 1.4s forwards;
+}
+
+@keyframes reactionBounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.2) translateY(60px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.15) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes reactionPulse {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.12);
+    }
+}
+
+@keyframes reactionFadeOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-40px);
+    }
+}
+
+@keyframes reactionContainerFade {
+    0%, 70% { opacity: 1; }
+    100% { opacity: 0; }
+}

@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+    --bg-deep: #07070d;
+    --bg-surface: #0e0e1a;
+    --bg-elevated: rgba(255, 255, 255, .04);
+    --glass-bg: rgba(10, 10, 14, .45);
+    --glass-border: rgba(255, 255, 255, .07);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, .35);
+    --text-primary: #e8e8f0;
+    --text-secondary: rgba(255, 255, 255, .5);
+    --text-muted: rgba(255, 255, 255, .28);
+    --accent-cyan: #00f0ff;
+    --accent-magenta: #ff00e5;
+    --accent-lime: #39ff14;
+    --accent-blue: #4d6dff;
+    --accent-pink: #ff2d6b;
+    --accent-gold: #ffd700;
+    --accent-purple: #b400ff;
+    --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: "Outfit", "Inter", sans-serif;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-full: 999px;
+    --transition-fast: .15s cubic-bezier(.4, 0, .2, 1);
+    --transition-smooth: .3s cubic-bezier(.4, 0, .2, 1);
+    --transition-bounce: .4s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    background: var(--bg-deep);
+    view-transition-name: root;
+}
