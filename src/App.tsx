@@ -670,6 +670,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <h1 style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0, 0, 0, 0)', border: 0 }}>toobz — AI Air Drawing & Hand Tracking Canvas</h1>
       <video ref={videoRef} autoPlay playsInline muted className="background-video" />
       <canvas ref={handCanvasRef} className="hand-overlay-canvas" />
       <canvas ref={drawCanvasRef} className="drawing-canvas" />
@@ -695,7 +696,7 @@ function App() {
         <div className="tutorial-overlay">
           <div className="tutorial-modal glass-panel">
             <div className="tutorial-logo">
-              <img src="/favicon.svg" alt="toobz logo" style={{ width: '64px', height: '64px', borderRadius: '16px', boxShadow: '0 8px 32px rgba(170, 59, 255, 0.3)' }} />
+              <img src="/favicon.svg" alt="toobz - The AI-powered Air Drawing Canvas" style={{ width: '64px', height: '64px', borderRadius: '16px', boxShadow: '0 8px 32px rgba(170, 59, 255, 0.3)' }} />
             </div>
             <h2>How to Play</h2>
             <div className="tutorial-grid">
